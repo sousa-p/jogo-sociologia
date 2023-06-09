@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.anuncio {
+    background-color: red;
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    animation-name: anuncio_animation;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    z-index: 2;
+}
+
+@keyframes anuncio_animation {
+    to { right: 100% }
+}

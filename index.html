@@ -1,33 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Venha ser um de nós</title>
-</head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
 
-<body>
-    <div class="console">
-        <div class="game-board">
-            <h1 class="score">score:</h1>
-            <h1 class="vida">vida:</h1>
-            <div id="anuncio" class="anuncio"></div>
-            <div id="anuncio1" class="anuncio"></div>
-            <div id="anuncio2" class="anuncio"></div>
-            <div id="anuncio3" class="anuncio"></div>
-            <div id="anuncio4" class="anuncio"></div>
-            <div id="anuncio5" class="anuncio"></div>
-            <img src="assets/images/mario.gif" class="mario">
-            <input type="range" max="5" min="0" readonly value="5" class="barraDeVida">
-        </div>
-        <div class="console_style"></div>
-    </div>
-    </div>
-</body>
-<script src="assets/script.js"></script>
+  <body>
+    <div id="app">
+      <p>Contador de Vida: {{player.vida}}</p>
+      <p>Contador de Score: {{player.score}}</p>
 
+      <anuncios
+        v-for="(anuncio, id) in anuncios"
+        :key="id" :mensagem="anuncio.mensagem"
+        :style="`top: ${anuncio.y}%; right: -${anuncio.x}%; animation-duration: ${anuncio.velocidade}s;`"
+        @click="player.vida--"
+      ></anuncios>
+    </div>
+  </body>
+  <script src="assets/js/components/anuncios.js"></script>
+  <script src="assets/js/script.js"></script>
 </html>
