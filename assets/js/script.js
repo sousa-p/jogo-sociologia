@@ -4,10 +4,10 @@ const app = createApp({
   data() {
     return {
       sounds: {
-        gameMusic: new Audio('../assets/audio/music_game.mpeg'),
-        anuncio: new Audio('../assets/audio/anuncio.mp3'),
-        start: new Audio('../assets/audio/start.mp3'),
-        player: new Audio('../assets/audio/player.mp3'),
+        gameMusic: new Audio('./assets/audio/music_game.mpeg'),
+        anuncio: new Audio('./assets/audio/anuncio.mp3'),
+        start: new Audio('./assets/audio/start.mp3'),
+        player: new Audio('./assets/audio/player.mp3'),
       },
       gameOcorrendo: false,
       player: {
@@ -28,7 +28,7 @@ const app = createApp({
         },
         reset () {
           this.vida = 100;
-          this.score = 9;
+          this.score = 0;
           this.mudarPosicao();
         }
       },
