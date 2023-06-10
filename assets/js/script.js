@@ -12,10 +12,10 @@ const app = createApp({
       gameOcorrendo: false,
       player: {
         vida: 100,
-        score: 10,
+        score: 0,
         x: 0,
         y: 0,
-        sprt: 'assets/sprts/mario.gif',
+        sprt: 'assets/sprts/livro-sprite.gif',
         
         aumentarVida(qtdd=5) {
           (this.vida + qtdd <= 100)
