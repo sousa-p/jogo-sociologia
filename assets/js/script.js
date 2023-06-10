@@ -35,38 +35,39 @@ const app = createApp({
       this.player.reset();
       this.criarAnuncios(5);
       this.gameOcorrendo = setInterval(() => {
-        this.player.vida -= 0.05;
+        this.player.vida -= 1;
         if (this.player.vida <= 0) {
           this.gameOver()
         };
-      }, 1);
+      }, 100);
     },
     criarAnuncios(qtdd=1) {
       for(let i=1; i<=qtdd; i++) {
         this.anuncios.push(
           {
             y: 100*Math.random(),
-            velocidade: Math.floor(10/(this.player.score+1)*(Math.random()+0.2)) + 1,
+            tamanho: Math.floor((Math.random()*50) + 50),
+            velocidade: Math.floor(Math.random()*10) + 1,
           }
         )
       }
     },
     aumentarScore() {
       this.player.score++;
-      this.criarAnuncios();
+      if (this.player.score % 2 === 0) this.criarAnuncios();
       if (this.player.score % 10 === 0) this.btnLimparAnuncios = true;
     },
-    limparAnuncios(qtdd=this.anuncios.length/4) {
+    limparAnuncios(qtdd=this.anuncios.length/2.5) {
       this.anuncios.splice(0, qtdd);
       this.btnLimparAnuncios = false;
     },
     gameOver () {
       alert('morreu');
       clearInterval(this.gameOcorrendo);
-      this.gameOcorrendo = false;
-      this.player.reset();
-      this.anuncios = []
       this.btnLimparAnuncios = false;
+      this.anuncios = []
+      this.player.reset();
+      this.gameOcorrendo = false;
     }
   }
 })
