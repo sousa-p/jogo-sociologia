@@ -34,7 +34,7 @@
         v-for="(anuncio, id) in anuncios"
         :key="id"
         :mensagem="anuncio.mensagem"
-        :style="`width: ${anuncio.tamanho}px; height: ${anuncio.tamanho}px;top: calc(${anuncio.y}% - 50px); animation-duration: ${anuncio.velocidade}s;`"
+        :style="`width: ${anuncio.tamanho}px; height: ${anuncio.tamanho}px;top: calc(${anuncio.y}% - 100px); animation-duration: ${anuncio.velocidade}s;`"
         @click="player.vida-=10"
       ></div>
     </div>

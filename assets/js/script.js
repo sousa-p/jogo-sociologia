@@ -17,8 +17,8 @@ const app = createApp({
             : this.vida += 100 - this.vida;
         },
         mudarPosicao() {
-          this.x = 90*Math.random()+3;
-          this.y = 90*Math.random()+3;
+          this.x = 80*Math.random()+3;
+          this.y = 80*Math.random()+3;
         },
         reset () {
           this.vida = 100;
@@ -47,7 +47,7 @@ const app = createApp({
           {
             y: 100*Math.random(),
             tamanho: Math.floor((Math.random()*50) + 50),
-            velocidade: Math.floor(Math.random()*10) + 1,
+            velocidade: Math.floor(Math.random()*5) + 1,
           }
         )
       }
