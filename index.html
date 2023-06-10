@@ -11,28 +11,33 @@
   </head>
 
   <body id="app">
-    <header>
-      <p>HP: {{player.vida}}</p>
-      <p>SCORE: {{player.score}}</p>
-    </header>
-
-    <div class="btnLimparAnuncios"
-      v-show="btnLimparAnuncios"
-      @click="limparAnuncios();btnLimparAnuncios = false"
-    ></div>
-
-    <img class="player"
-      :src="player.sprt"
-      :style="`top: calc(${player.y}%); right: calc(${player.x}%)`"
-      @click="aumentarScore();player.mudarPosicao()"
-    ></img>
-    <div class="anuncio"
-      v-for="(anuncio, id) in anuncios"
-      :key="id"
-      :mensagem="anuncio.mensagem"
-      :style="`top: calc(${anuncio.y}% - 50px); animation-duration: ${anuncio.velocidade}s;`"
-      @click="player.vida--"
-    ></div>
+    <div class="start_page" v-show="!gameOcorrendo">
+      <button class="start_btn" @click="startGame()">Começar</button>
+    </div>
+    <div class="game" v-show="gameOcorrendo">
+      <header>
+        <div class="barra_vida" :style="`border-right-width: ${300 - player.vida/100*300}px;`"></div>
+        <p>SCORE: {{player.score}}</p>
+      </header>
+  
+      <div class="btnLimparAnuncios"
+        v-show="btnLimparAnuncios"
+        @click="limparAnuncios();player.aumentarVida(25);btnLimparAnuncios = false"
+      ></div>
+  
+      <img class="player"
+        :src="player.sprt"
+        :style="`top: calc(${player.y}%); right: calc(${player.x}%)`"
+        @click="player.aumentarVida();aumentarScore();player.mudarPosicao();"
+      ></img>
+      <div class="anuncio"
+        v-for="(anuncio, id) in anuncios"
+        :key="id"
+        :mensagem="anuncio.mensagem"
+        :style="`top: calc(${anuncio.y}% - 50px); animation-duration: ${anuncio.velocidade}s;`"
+        @click="player.vida-=10"
+      ></div>
+    </div>
   </body>
   <script src="assets/js/script.js"></script>
 </html>

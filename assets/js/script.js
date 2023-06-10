@@ -3,16 +3,27 @@ const { createApp } = Vue
 const app = createApp({
   data() {
     return {
+      gameOcorrendo: false,
       player: {
-        vida: 5,
+        vida: 100,
         score: 0,
         x: 0,
         y: 0,
         sprt: 'assets/sprts/mario.gif',
-
+        
+        aumentarVida(qtdd=5) {
+          (this.vida + qtdd <= 100)
+            ? this.vida += qtdd
+            : this.vida += 100 - this.vida;
+        },
         mudarPosicao() {
           this.x = 90*Math.random()+3;
           this.y = 90*Math.random()+3;
+        },
+        reset () {
+          this.vida = 100;
+          this.score = 0;
+          this.mudarPosicao();
         }
       },
       anuncios: [],
@@ -20,6 +31,16 @@ const app = createApp({
     }
   },
   methods: {
+    startGame () {
+      this.player.reset();
+      this.criarAnuncios(5);
+      this.gameOcorrendo = setInterval(() => {
+        this.player.vida -= 0.05;
+        if (this.player.vida <= 0) {
+          this.gameOver()
+        };
+      }, 1);
+    },
     criarAnuncios(qtdd=1) {
       for(let i=1; i<=qtdd; i++) {
         this.anuncios.push(
@@ -38,12 +59,15 @@ const app = createApp({
     limparAnuncios(qtdd=this.anuncios.length/4) {
       this.anuncios.splice(0, qtdd);
       this.btnLimparAnuncios = false;
+    },
+    gameOver () {
+      alert('morreu');
+      clearInterval(this.gameOcorrendo);
+      this.gameOcorrendo = false;
+      this.player.reset();
+      this.anuncios = []
+      this.btnLimparAnuncios = false;
     }
-  }
-  ,
-  created() {
-    this.player.mudarPosicao();
-    this.criarAnuncios(this.player.score + 5);
   }
 })
 
