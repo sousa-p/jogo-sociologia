@@ -4,23 +4,50 @@
     box-sizing: border-box;
 }
 
-body {
-    height: 100vh;
+#app{
     width: 100vw;
-    overflow: hidden;
+    font-family: 'Press Start 2P', cursive;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    font-size: 1.5em;
+    padding: 12px;
+    z-index: 1;
+}
+
+.player {
+    width: 33%;
+    z-index: -2;
+    position: absolute;
 }
 
 .anuncio {
-    background-color: red;
-    width: 200px;
+    width: 50px;
     height: 50px;
+    background-color: red;
     position: absolute;
-    animation-name: anuncio_animation;
+    right: 0;
+    z-index: -1;
+    animation-name: animation_anuncio;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    z-index: 2;
 }
 
-@keyframes anuncio_animation {
-    to { right: 100% }
+.btnLimparAnuncios {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: green;
+    z-index: 3;
+}
+
+@keyframes animation_anuncio {
+    to { right: 110% }
 }

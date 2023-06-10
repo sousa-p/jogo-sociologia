@@ -4,24 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Venha ser um de nós</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
 
-  <body>
-    <div id="app">
-      <p>Contador de Vida: {{player.vida}}</p>
-      <p>Contador de Score: {{player.score}}</p>
+  <body id="app">
+    <header>
+      <p>HP: {{player.vida}}</p>
+      <p>SCORE: {{player.score}}</p>
+    </header>
 
-      <anuncios
-        v-for="(anuncio, id) in anuncios"
-        :key="id" :mensagem="anuncio.mensagem"
-        :style="`top: ${anuncio.y}%; right: -${anuncio.x}%; animation-duration: ${anuncio.velocidade}s;`"
-        @click="player.vida--"
-      ></anuncios>
-    </div>
+    <div class="btnLimparAnuncios"
+      v-show="btnLimparAnuncios"
+      @click="limparAnuncios();btnLimparAnuncios = false"
+    ></div>
+
+    <img class="player"
+      :src="player.sprt"
+      :style="`top: calc(${player.y}%); right: calc(${player.x}%)`"
+      @click="aumentarScore();player.mudarPosicao()"
+    ></img>
+    <div class="anuncio"
+      v-for="(anuncio, id) in anuncios"
+      :key="id"
+      :mensagem="anuncio.mensagem"
+      :style="`top: calc(${anuncio.y}% - 50px); animation-duration: ${anuncio.velocidade}s;`"
+      @click="player.vida--"
+    ></div>
   </body>
-  <script src="assets/js/components/anuncios.js"></script>
   <script src="assets/js/script.js"></script>
 </html>
