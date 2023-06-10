@@ -15,6 +15,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 }
 
 .start_btn {
@@ -62,16 +63,27 @@ header {
 }
 
 .btnLimparAnuncios {
-    width: 75px;
-    height: 75px;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background: green;
     z-index: 3;
+}
+
+.shaking {
+    animation-name: shaking;
+    animation-duration: 2s;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
 }
 
 @keyframes animation_anuncio {
     to { right: 110% }
+}
+
+@keyframes shaking {
+    0% {rotate: -10deg}
+    100% { rotate: 10deg}
+
 }

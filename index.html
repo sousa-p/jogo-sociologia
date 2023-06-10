@@ -20,22 +20,22 @@
         <p>SCORE: {{player.score}}</p>
       </header>
   
-      <div class="btnLimparAnuncios"
+      <img src="./assets/sprts/limparAnuncios.png" class="btnLimparAnuncios shaking"
         v-show="btnLimparAnuncios"
         @click="limparAnuncios();player.aumentarVida(25);btnLimparAnuncios = false"
-      ></div>
+      ></img>
   
       <img class="player"
         :src="player.sprt"
         :style="`top: calc(${player.y}%); right: calc(${player.x}%)`"
-        @click="player.aumentarVida();aumentarScore();player.mudarPosicao();"
+        @click="clickPlayer()"
       ></img>
       <div class="anuncio"
         v-for="(anuncio, id) in anuncios"
         :key="id"
         :mensagem="anuncio.mensagem"
         :style="`width: ${anuncio.tamanho}px; height: ${anuncio.tamanho}px;top: calc(${anuncio.y}% - 100px); animation-duration: ${anuncio.velocidade}s;`"
-        @click="player.vida-=10"
+        @click="clickAnuncio()"
       ></div>
     </div>
   </body>

@@ -3,10 +3,16 @@ const { createApp } = Vue
 const app = createApp({
   data() {
     return {
+      sounds: {
+        gameMusic: new Audio('../assets/audio/music_game.mpeg'),
+        anuncio: new Audio('../assets/audio/anuncio.mp3'),
+        start: new Audio('../assets/audio/start.mp3'),
+        player: new Audio('../assets/audio/player.mp3'),
+      },
       gameOcorrendo: false,
       player: {
         vida: 100,
-        score: 0,
+        score: 10,
         x: 0,
         y: 0,
         sprt: 'assets/sprts/mario.gif',
@@ -17,12 +23,12 @@ const app = createApp({
             : this.vida += 100 - this.vida;
         },
         mudarPosicao() {
-          this.x = 80*Math.random()+3;
-          this.y = 80*Math.random()+3;
+          this.x = 78*Math.random()+3;
+          this.y = 78*Math.random()+3;
         },
         reset () {
           this.vida = 100;
-          this.score = 0;
+          this.score = 9;
           this.mudarPosicao();
         }
       },
@@ -32,14 +38,20 @@ const app = createApp({
   },
   methods: {
     startGame () {
-      this.player.reset();
-      this.criarAnuncios(5);
-      this.gameOcorrendo = setInterval(() => {
-        this.player.vida -= 1;
-        if (this.player.vida <= 0) {
-          this.gameOver()
-        };
-      }, 100);
+      this.sounds.start.currentTime = 1;
+      this.sounds.start.play();
+      setTimeout(() => {
+        this.sounds.gameMusic.volume = 0.5;
+        this.player.reset();
+        this.criarAnuncios(5);
+        this.sounds.gameMusic.play();
+        this.gameOcorrendo = setInterval(() => {
+          this.player.vida -= 1;
+          if (this.player.vida <= 0) {
+            this.gameOver()
+          };
+        }, 100);
+        }, 500);
     },
     criarAnuncios(qtdd=1) {
       for(let i=1; i<=qtdd; i++) {
@@ -52,6 +64,18 @@ const app = createApp({
         )
       }
     },
+    clickAnuncio() {
+      this.player.aumentarVida(-10);
+      this.sounds.anuncio.currentTime = 0.25;
+      this.sounds.anuncio.play();
+    },
+    clickPlayer() {
+      this.sounds.player.currentTime = 0;
+      this.sounds.player.play();
+      this.player.aumentarVida();
+      this.aumentarScore();
+      this.player.mudarPosicao();
+    },
     aumentarScore() {
       this.player.score++;
       if (this.player.score % 2 === 0) this.criarAnuncios();
@@ -62,6 +86,8 @@ const app = createApp({
       this.btnLimparAnuncios = false;
     },
     gameOver () {
+      this.sounds.gameMusic.pause();
+      this.sounds.gameMusic.currentTime = 0;
       alert('morreu');
       clearInterval(this.gameOcorrendo);
       this.btnLimparAnuncios = false;
