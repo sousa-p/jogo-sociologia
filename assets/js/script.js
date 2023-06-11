@@ -11,21 +11,21 @@ const app = createApp({
         limparAnuncios: new Audio('./assets/audio/power-up.wav')
       },
       gameOcorrendo: false,
+      gameOverPage: false,
       player: {
         vida: 100,
         score: 0,
         x: 0,
         y: 0,
         sprt: 'assets/sprts/livro-sprite.gif',
-        
         aumentarVida(qtdd=5) {
           (this.vida + qtdd <= 100)
             ? this.vida += qtdd
             : this.vida += 100 - this.vida;
         },
         mudarPosicao() {
-          this.x = 78*Math.random()+3;
-          this.y = 78*Math.random()+3;
+          this.x = 75*Math.random()+3;
+          this.y = 75*Math.random()+3;
         },
         reset () {
           this.vida = 100;
@@ -41,25 +41,24 @@ const app = createApp({
     startGame () {
       this.sounds.start.currentTime = 1;
       this.sounds.start.play();
+      this.player.reset();
+      this.criarAnuncios(5);
       setTimeout(() => {
         this.sounds.gameMusic.volume = 0.5;
-        this.player.reset();
-        this.criarAnuncios(5);
         this.sounds.gameMusic.play();
         this.gameOcorrendo = setInterval(() => {
           this.player.vida -= 1;
-          if (this.player.vida <= 0) {
-            this.gameOver()
-          };
+          if (this.player.vida <= 0) { this.gameOver() };
         }, 100);
-        }, 500);
+      }, 500);
     },
     criarAnuncios(qtdd=1) {
       for(let i=1; i<=qtdd; i++) {
         this.anuncios.push(
           {
-            y: 100*Math.random(),
-            tamanho: Math.floor((Math.random()*50) + 50),
+            y: 70*Math.random() + 15,
+            imgId: Math.ceil(Math.random()*7),
+            tamanho: Math.floor((Math.random()*30) + 50),
             velocidade: Math.floor(Math.random()*5) + 1,
           }
         )
@@ -90,12 +89,12 @@ const app = createApp({
     gameOver () {
       this.sounds.gameMusic.pause();
       this.sounds.gameMusic.currentTime = 0;
-      alert('morreu');
       clearInterval(this.gameOcorrendo);
+      this.gameOcorrendo = false;
       this.btnLimparAnuncios = false;
       this.anuncios = []
       this.player.reset();
-      this.gameOcorrendo = false;
+      this.gameOverPage = true;
     }
   }
 })

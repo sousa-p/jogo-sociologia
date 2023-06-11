@@ -11,6 +11,10 @@
   </head>
 
   <body id="app">
+    <div class="gameover_page" v-show="gameOverPage">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut etiam sit amet nisl purus in mollis. At imperdiet dui accumsan sit amet. Arcu dictum varius duis at consectetur lorem donec massa. In nulla posuere sollicitudin aliquam. Purus gravida quis blandit turpis.</p>
+      <button class="start_btn" @click="gameOverPage = false">Tentar Novamente</button>
+    </div>
     <div class="start_page" v-show="!gameOcorrendo">
       <button class="start_btn" @click="startGame()">Começar</button>
     </div>
@@ -25,18 +29,19 @@
         @click="limparAnuncios();player.aumentarVida(25);btnLimparAnuncios = false"
       ></img>
   
-      <img class="player"
+      <img class="player shaking"
         :src="player.sprt"
         :style="`top: calc(${player.y}%); right: calc(${player.x}%)`"
         @click="clickPlayer()"
       ></img>
-      <div class="anuncio"
-        v-for="(anuncio, id) in anuncios"
+      <img class="anuncio"
+      v-for="(anuncio, id) in anuncios"
+        :src="`./assets/sprts/anuncio0${anuncio.imgId}.png`"
         :key="id"
         :mensagem="anuncio.mensagem"
-        :style="`width: ${anuncio.tamanho}px; height: ${anuncio.tamanho}px;top: calc(${anuncio.y}% - 100px); animation-duration: ${anuncio.velocidade}s;`"
+        :style="`width: ${anuncio.tamanho}px;top: calc(${anuncio.y}% - 100px); animation-duration: ${anuncio.velocidade}s;`"
         @click="clickAnuncio()"
-      ></div>
+      ></img>
     </div>
   </body>
   <script src="assets/js/script.js"></script>
