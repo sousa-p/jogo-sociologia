@@ -8,6 +8,7 @@ const app = createApp({
         anuncio: new Audio('./assets/audio/anuncio.mp3'),
         start: new Audio('./assets/audio/start.mp3'),
         player: new Audio('./assets/audio/player.mp3'),
+        limparAnuncios: new Audio('./assets/audio/power-up.wav')
       },
       gameOcorrendo: false,
       player: {
@@ -83,6 +84,7 @@ const app = createApp({
     },
     limparAnuncios(qtdd=this.anuncios.length/2.5) {
       this.anuncios.splice(0, qtdd);
+      this.sounds.limparAnuncios.play();
       this.btnLimparAnuncios = false;
     },
     gameOver () {
