@@ -4,38 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Venha ser um de nós</title>
+    <title>Conhecimento</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
 
-  <body id="app">
-    <div class="gameover_page" v-show="gameOverPage">
+  <body id="app" v-clock>
+    <div class="gameover-page" v-show="mostrarGameOver">
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut etiam sit amet nisl purus in mollis. At imperdiet dui accumsan sit amet. Arcu dictum varius duis at consectetur lorem donec massa. In nulla posuere sollicitudin aliquam. Purus gravida quis blandit turpis.</p>
-      <button class="start_btn" @click="gameOverPage = false">Tentar Novamente</button>
+      <button class="start-btn" @click="mostrarGameOver = false">Tentar Novamente</button>
     </div>
-    <div class="start_page" v-show="!gameOcorrendo">
-      <button class="start_btn" @click="startGame()">Começar</button>
+    <div class="start-page" v-show="!partidaOcorrendo">
+      <button class="start-btn" @click="comecarPartida()">Começar</button>
     </div>
-    <div class="game" v-show="gameOcorrendo">
+    <div class="game" v-show="partidaOcorrendo">
       <header>
-        <div class="barra_vida" :style="`border-right-width: ${300 - player.vida/100*300}px;`"></div>
-        <p>SCORE: {{player.score}}</p>
+        <div class="barra-vida"
+          :style="`border-right-width: ${300 - jogador.vida/100*300}px;`"
+        ></div>
+        <p>PONTOS: {{jogador.score}}</p>
       </header>
-  
-      <img src="./assets/sprts/limparAnuncios.png" class="btnLimparAnuncios shaking"
-        v-show="btnLimparAnuncios"
-        @click="limparAnuncios();player.aumentarVida(25);btnLimparAnuncios = false"
+      
+      <img src="./assets/sprts/limparAnuncios.png" class="limpar-anuncios shaking"
+        v-show="mostrarLimparAnuncios"
+        @click="limparAnuncios();jogador.aumentarVida(25);btnLimparAnuncios = false"
       ></img>
-  
-      <img class="player shaking"
-        :src="player.sprt"
-        :style="`top: calc(${player.y}%); right: calc(${player.x}%)`"
-        @click="clickPlayer()"
+      
+      <img src="assets/sprts/livro-sprite.gif" class="livro shaking"
+        :style="`top: calc(${livro.y}%); right: calc(${livro.x}%)`"
+        @click="clickLivro()"
       ></img>
       <img class="anuncio"
-      v-for="(anuncio, id) in anuncios"
+        v-for="(anuncio, id) in anuncios"
         :src="`./assets/sprts/anuncio0${anuncio.imgId}.png`"
         :key="id"
         :mensagem="anuncio.mensagem"
