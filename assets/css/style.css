@@ -10,7 +10,8 @@
     color: #fff;
     text-align: justify;
     line-height: 1.6rem;
-    background: #a81000;
+    background-image: url('../sprts/bg-pattern.png');
+    background-repeat: repeat;
 }
 
 .start_page,
@@ -56,7 +57,7 @@ header {
 
 .barra_vida {
     width: 300px;
-    height: 35px;
+    height: 35px;   
     border-right-width: 0;
     border-right-style: solid;
     background-color: #0a8000;
