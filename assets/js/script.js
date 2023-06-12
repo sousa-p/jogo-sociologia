@@ -53,7 +53,10 @@ const app = createApp({
         this.sons.partida.play();
         this.partidaOcorrendo = setInterval(() => {
           this.jogador.vida -= 1;
+          console.log('x')
           if (this.jogador.vida <= 0) {
+            clearInterval(this.partidaOcorrendo);
+            this.partidaOcorrendo = false;
             this.gameOver();
           }
         }, 100);
@@ -92,8 +95,6 @@ const app = createApp({
       this.mostrarLimparAnuncios = false;
     },
     gameOver() {
-      clearInterval(this.partidaOcorrendo);
-      this.partidaOcorrendo = false;
       this.sons.partida.pause();
       this.sons.partida.currentTime = 0;
       this.sons.gameOver.play();
