@@ -5,9 +5,9 @@ Jogo realizado, para o trabalho de sociologia
 https://sousa-p.github.io/jogo-sociologia/
 
 ## Devs:
-* Pedro Vintage - Lógica
+* Pedro Vintage - Programação
 * Luiz Fiuza - Sprites
-* Marlon Passos - Músicasa
+* Marlon Passos - Músicas
 
 
 ## Desktop -
